@@ -1,19 +1,16 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a
-        class="navbar-brand"
-        href="#"
-      >
+      <Link to="/users">
         <img
           src="./github_logo.png"
           width="50"
           height="50"
           alt="page logo"
         />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -30,21 +27,21 @@ function Navbar() {
         id="navbarSupportedContent"
       > 
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a
-              className="nav-link"
-              href="#"
+          <li className="nav-item">
+            <Link
+              className="nav-link active"
+              to="/users"
             >
               Users
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a
+            <Link
               className="nav-link"
-              href="#"
+              to="/repos"
             >
               Repositories
-            </a>
+            </Link>
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0">
