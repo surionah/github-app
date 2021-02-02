@@ -3,12 +3,12 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import Navbar from './components/navbar';
+import HeaderNavbar from './components/header-navbar';
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <HeaderNavbar />
       <div>
         <Switch>
           <Route path="/users">
