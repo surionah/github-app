@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import HeaderNavbar from './components/header-navbar';
+import Footer from './components/footer';
 import Users from './pages/users';
 import Repos from './pages/repos';
 
@@ -24,6 +25,7 @@ function App() {
           </Switch>
         </>
       </Container>
+      <Footer />
     </Router>
   );
 }
