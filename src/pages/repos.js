@@ -12,20 +12,27 @@ function Repos() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [reposList, setReposList] = useState([]);
+  const [lastItemId, setLastItemId] = useState(1);
 
-  async function loadUsers() {
+  async function loadRepos() {
     try {
-      const reposResult = await axios.get('https://api.github.com/repositories');
-      setReposList(reposResult.data);
-      setIsLoading(false);
+      const reposResult = await axios.get('https://api.github.com/repositories', { params: { since: lastItemId } });
+      setReposList([...reposList, ...reposResult.data]);
     } catch(e) {
       console.error(e);
     }
   }
 
   useEffect(() => {
-    loadUsers();
-  }, [])
+    loadRepos();
+  }, []);
+
+  useEffect(() => {
+    if (reposList.length > 0) {
+      setLastItemId(reposList[reposList.length - 1].id);
+      setIsLoading(false);
+    }
+  }, [reposList]);
 
   return (
     <>
@@ -36,7 +43,7 @@ function Repos() {
         ? <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status" />
           </div>
-        : <InfiniteScrollList list={reposList} itemNameAttribute="name" />
+        : <InfiniteScrollList list={reposList} itemNameAttribute="name" fetchData={loadRepos} />
       }
     </>
   );
