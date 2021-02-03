@@ -3,6 +3,9 @@ import {
   Spinner
 } from 'react-bootstrap';
 import axios from 'axios';
+
+import PageTitle from '../components/title';
+import PageDescription from '../components/description';
 import InfiniteScrollList from '../components/infinite-scroll-list';
 
 function Repos() {
@@ -26,13 +29,15 @@ function Repos() {
 
   return (
     <>
-    {
-      isLoading
-      ? <div className="d-flex justify-content-center">
-          <Spinner animation="border" role="status" />
-        </div>
-      : <InfiniteScrollList list={reposList} itemNameAttribute="name" />
-    }
+      <PageTitle content="Repositories" />
+      <PageDescription content="In this app you could find the created repositories on Github." />
+      {
+        isLoading
+        ? <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status" />
+          </div>
+        : <InfiniteScrollList list={reposList} itemNameAttribute="name" />
+      }
     </>
   );
 }

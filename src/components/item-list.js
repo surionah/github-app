@@ -11,9 +11,9 @@ const Name = styled.span`
   margin-left: 1rem;
 `;
 
-function ItemList({name, imageUrl, itemId}) {
+function ItemList({name, imageUrl}) {
   return (
-    <Card bg="dark" text="light" key={itemId}>
+    <Card bg="dark" text="light">
       <Card.Body>
         <Card.Title>
           <Row>
