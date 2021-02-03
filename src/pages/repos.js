@@ -30,7 +30,7 @@ function Repos() {
   return (
     <>
       <PageTitle content="Repositories" />
-      <PageDescription content="In this app you could find the created repositories on Github." />
+      <PageDescription content="In this page you could find the created repositories on Github." />
       {
         isLoading
         ? <div className="d-flex justify-content-center">

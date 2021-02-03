@@ -13,7 +13,7 @@ ReactDOM.render(
 
 axios.interceptors.request.use(
   request => {
-    request.headers['Authorization'] = "token d8b43a88a86e053cdec03c7687f59714310356a7";
+    request.headers['Authorization'] = `${process.env.GITHUB_TOKEN}`;
     return request
   }, error => {
     return Promise.reject(error);
