@@ -16,7 +16,7 @@ function Repos() {
 
   async function loadRepos() {
     try {
-      const reposResult = await axios.get('https://api.github.com/repositories', { params: { since: lastItemId } });
+      const reposResult = await axios.get(`${process.env.REACT_APP_BASE_URL}repositories`, { params: { since: lastItemId } });
       setReposList([...reposList, ...reposResult.data]);
     } catch(e) {
       console.error(e);
@@ -25,6 +25,7 @@ function Repos() {
 
   useEffect(() => {
     loadRepos();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

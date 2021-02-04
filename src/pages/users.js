@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import {
+  useState,
+  useEffect
+} from 'react';
 import {
   Spinner
 } from 'react-bootstrap';
@@ -17,7 +20,7 @@ function Users() {
 
   async function loadUsers() {
     try {
-      const usersResult = await axios.get('https://api.github.com/users', { params: { since: lastItemId, per_page: CONSTANTS.ITEMS_LENGTH } });
+      const usersResult = await axios.get(`${process.env.REACT_APP_BASE_URL}users`, { params: { since: lastItemId, per_page: CONSTANTS.ITEMS_LENGTH } });
       setUsersList([...usersList, ...usersResult.data]);
     } catch(e) {
       console.error(e);
@@ -26,6 +29,7 @@ function Users() {
 
   useEffect(() => {
     loadUsers();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
