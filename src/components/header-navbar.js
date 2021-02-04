@@ -6,12 +6,12 @@ import {
   Button
 } from 'react-bootstrap';
 
-function HeaderNavbar() {
+function HeaderNavbar({location}) {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="/users">
         <img
-          src="./github_logo.png"
+          src="../github_logo.png"
           width="50"
           height="50"
           alt="github app logo"
@@ -19,7 +19,7 @@ function HeaderNavbar() {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="github-navbar" />
       <Navbar.Collapse id="github-navbar">
-        <Nav className="mr-auto">
+        <Nav activeKey={location.pathname} className="mr-auto">
           <Nav.Link href="/users">Users</Nav.Link>
           <Nav.Link href="/repos">Repositories</Nav.Link>
         </Nav>
