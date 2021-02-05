@@ -3,6 +3,7 @@ import {
   useEffect,
   useContext
 } from 'react';
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 import PageTitle from '../components/title';
@@ -16,14 +17,17 @@ function SearchUsers() {
   const appContext = useContext(AppContext);
   const [usersList, setUsersList] = useState(null);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false)
 
   async function loadUsers() {
     if (appContext.criteria !== '') {
+      setIsLoading(true);
       try {
         const usersResult = await axios.get
           (`${process.env.REACT_APP_BASE_URL}users?q=${appContext.criteria} in:login&per_page=10&page=${page}`);
         const nonRepeatedList = new Set([...usersList, ...usersResult.data.items]);
         setUsersList(Array.from(nonRepeatedList));
+        setIsLoading(false);
       } catch(e) {
         console.error(e);
       }
@@ -50,6 +54,13 @@ function SearchUsers() {
       <PageTitle content="Users" />
       <PageDescription content="In this page you can saerch for registered users on Github." />
       <Search search={() => setUsersList([])} />
+      {
+        isLoading && (
+          <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status" />
+          </div>
+        )
+      }
       <InfiniteScrollList
         list={usersList}
         itemNameAttribute="login"
