@@ -16,15 +16,29 @@ const Name = styled.span`
 
 function ItemList({name, imageUrl, pageUrl}) {
   return (
-    <Card bg="dark" text="light">
+    <Card
+      bg="dark"
+      text="light"
+    >
       <Card.Body>
         <Card.Title>
           <Row>
-            <Col md="9" sm="12">
-              <Image src={imageUrl} alt="avatar" width="40" height="40"></Image>
+            <Col
+              md="9"
+              sm="12"
+            >
+              <Image
+                src={imageUrl}
+                alt="avatar"
+                width="40"
+                height="40"
+              />
               <Name>{name}</Name>
             </Col>
-            <Col md="3" sm="12">
+            <Col
+              md="3"
+              sm="12"
+            >
               <Button
                 variant="primary"
                 className="float-md-right mt-md-0 mt-3"

@@ -11,7 +11,7 @@ const Title = styled.h1`
 
 function PageTitle({content}) {
   return (
-    <Title>{ content }</Title>
+    <Title>{content}</Title>
   );
 }
 

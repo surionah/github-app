@@ -20,8 +20,8 @@ function SearchUsers() {
   async function loadUsers() {
     if (appContext.criteria !== '') {
       try {
-        const usersResult = await axios
-          .get(`${process.env.REACT_APP_BASE_URL}users?q=${appContext.criteria} in:login&per_page=10&page=${page}`);
+        const usersResult = await axios.get
+          (`${process.env.REACT_APP_BASE_URL}users?q=${appContext.criteria} in:login&per_page=10&page=${page}`);
         const nonRepeatedList = new Set([...usersList, ...usersResult.data.items]);
         setUsersList(Array.from(nonRepeatedList));
       } catch(e) {

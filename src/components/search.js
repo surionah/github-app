@@ -1,6 +1,4 @@
-import {
-  useContext
-} from 'react';
+import { useContext } from 'react';
 import {
   Button,
   Form,
@@ -25,7 +23,7 @@ function Search({search}) {
       />
       <Button
         variant="outline-info"
-        onClick={() => search()}
+        onClick={search}
       >
         Search
       </Button>

@@ -20,8 +20,8 @@ function SearchRepos() {
   async function loadRepos() {
     if (appContext.criteria !== '') {
       try {
-        const usersResult = await axios
-          .get(`${process.env.REACT_APP_BASE_URL}repositories?q=${appContext.criteria} in:name&per_page=10&page=${page}`);
+        const usersResult = await axios.get
+          (`${process.env.REACT_APP_BASE_URL}repositories?q=${appContext.criteria} in:name&per_page=10&page=${page}`);
         const nonRepeatedList = new Set([...reposList, ...usersResult.data.items]);
         setReposList(Array.from(nonRepeatedList));
       } catch(e) {

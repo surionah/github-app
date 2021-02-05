@@ -5,7 +5,7 @@ const FooterPanel = styled.div`
   color: white;
   background-color: #343a40;
   margin-top: 2rem;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   text-align: center;
   font-size: 0.8rem;
   border-top: 1rem solid white;
@@ -18,7 +18,10 @@ const Author = styled.span`
 
 function Footer() {
   return (
-    <FooterPanel className="fixed-bottom">Github basic app - Powered by <Author>surionah</Author></FooterPanel>
+    <FooterPanel className="fixed-bottom">
+      Github basic app - Powered by
+      <Author> surionah</Author>
+    </FooterPanel>
   )
 }
 
