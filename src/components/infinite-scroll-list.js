@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ListContainer = styled.div`
-  height: 50rem;
+  display: block
   overflow-y: auto;
   padding: 1rem;
   border: gray solid 2px;
@@ -30,7 +30,7 @@ function InfiniteScrollList({list, itemNameAttribute, fetchData}) {
             <div key={item.id}>
               <ItemList
                 name={item[itemNameAttribute]}
-                imageUrl={item.avatar_url || './repo_icon.png'}
+                imageUrl={item.avatar_url || '../repo_icon.png'}
               />
               <Separator />
             </div>

@@ -20,13 +20,9 @@ function HeaderNavbar({location}) {
       <Navbar.Toggle aria-controls="github-navbar" />
       <Navbar.Collapse id="github-navbar">
         <Nav activeKey={location.pathname} className="mr-auto">
-          <Nav.Link href="/users">Users</Nav.Link>
-          <Nav.Link href="/repos">Repositories</Nav.Link>
+          <Nav.Link href="/users/search">Search Users</Nav.Link>
+          <Nav.Link href="/repos/search">Search Repositories</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
-        </Form>
       </Navbar.Collapse>
     </Navbar>
   );

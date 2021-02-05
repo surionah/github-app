@@ -8,6 +8,7 @@ const FooterPanel = styled.div`
   padding-top: 2rem;
   text-align: center;
   font-size: 0.8rem;
+  border-top: 1rem solid white;
 `;
 
 const Author = styled.span`
@@ -17,7 +18,7 @@ const Author = styled.span`
 
 function Footer() {
   return (
-    <FooterPanel>Github basic app - Powered by <Author>surionah</Author></FooterPanel>
+    <FooterPanel className="fixed-bottom">Github basic app - Powered by <Author>surionah</Author></FooterPanel>
   )
 }
 
