@@ -8,7 +8,7 @@ import PageTitle from '../components/title';
 import PageDescription from '../components/description';
 import InfiniteScrollList from '../components/infinite-scroll-list';
 
-function Repos() {
+function SearchRepos() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [reposList, setReposList] = useState([]);
@@ -50,4 +50,4 @@ function Repos() {
   );
 }
 
-export default Repos;
+export default SearchRepos;

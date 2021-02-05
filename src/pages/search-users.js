@@ -12,7 +12,7 @@ import PageDescription from '../components/description';
 import InfiniteScrollList from '../components/infinite-scroll-list';
 import CONSTANTS from '../constants/constants';
 
-function Users() {
+function SearchUsers() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
@@ -54,4 +54,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default SearchUsers;

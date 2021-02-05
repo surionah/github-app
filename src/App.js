@@ -9,8 +9,8 @@ import { withRouter } from "react-router";
 
 import HeaderNavbar from './components/header-navbar';
 import Footer from './components/footer';
-import Users from './pages/users';
-import Repos from './pages/repos';
+import Users from './pages/search-users';
+import Repos from './pages/search-repos';
 import UserDetails from './pages/user-details';
 import RepoDetails from './pages/repo-details';
 
@@ -23,10 +23,10 @@ function App() {
       <Container>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/users" />
+            <Redirect to="/users/search" />
           </Route>
-          <Route exact path="/users" component={Users} />
-          <Route exact path="/repos" component={Repos} />
+          <Route exact path="/users/search" component={Users} />
+          <Route exact path="/repos/search" component={Repos} />
           <Route exact path="/users/:id" component={UserDetails} />
           <Route exact path="/repos/:id" component={RepoDetails} />
         </Switch>
