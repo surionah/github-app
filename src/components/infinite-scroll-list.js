@@ -38,6 +38,7 @@ function InfiniteScrollList({list, itemNameAttribute, fetchData}) {
                   <div key={item.id}>
                     <ItemList
                       name={item[itemNameAttribute]}
+                      pageUrl={item.html_url}
                       imageUrl={item.avatar_url || '../repo_icon.png'}
                     />
                     <Separator />

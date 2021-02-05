@@ -14,7 +14,7 @@ const Name = styled.span`
   }
 `;
 
-function ItemList({name, imageUrl}) {
+function ItemList({name, imageUrl, pageUrl}) {
   return (
     <Card bg="dark" text="light">
       <Card.Body>
@@ -27,7 +27,9 @@ function ItemList({name, imageUrl}) {
             <Col md="3" sm="12">
               <Button
                 variant="primary"
-                className="float-md-right mt-md-0 mt-3 "
+                className="float-md-right mt-md-0 mt-3"
+                href={pageUrl}
+                target="_blank"
               >
                 See more...
               </Button>
