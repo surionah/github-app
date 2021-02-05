@@ -1,6 +1,7 @@
-import ItemList from './item-list';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Spinner } from 'react-bootstrap';
+import ItemList from './item-list';
 
 const ListContainer = styled.div`
   display: block
@@ -18,27 +19,35 @@ const Separator = styled.div`
 function InfiniteScrollList({list, itemNameAttribute, fetchData}) {
 
   return (
-    <ListContainer>
-      <InfiniteScroll
-        dataLength={list.length}
-        next={fetchData}
-        hasMore={true}
-        loader={<h4>Loading...</h4>}
-      >
-        {
-          list.map(item =>
-            <div key={item.id}>
-              <ItemList
-                name={item[itemNameAttribute]}
-                imageUrl={item.avatar_url || '../repo_icon.png'}
-              />
-              <Separator />
-            </div>
-          )
-        }
-      </InfiniteScroll>
-    </ListContainer>
-    
+    <>
+      {
+        list && list.length > 0 && 
+          <ListContainer>
+            <InfiniteScroll
+              dataLength={list.length}
+              next={fetchData}
+              hasMore={true}
+              loader={
+                <div className="d-flex justify-content-center">
+                  <Spinner animation="border" role="status" />
+                </div>
+              }
+            >
+              {
+                list.map(item =>
+                  <div key={item.id}>
+                    <ItemList
+                      name={item[itemNameAttribute]}
+                      imageUrl={item.avatar_url || '../repo_icon.png'}
+                    />
+                    <Separator />
+                  </div>
+                )
+              }
+            </InfiniteScroll>
+          </ListContainer>
+      }
+    </>
   );
 }
 

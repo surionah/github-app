@@ -11,8 +11,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-console.log(`token ${process.env.REACT_APP_GITHUB_TOKEN}`);
-
 axios.interceptors.request.use(
   request => {
     request.headers['Authorization'] = `token ${process.env.REACT_APP_GITHUB_TOKEN}`;

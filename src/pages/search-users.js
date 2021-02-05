@@ -1,55 +1,60 @@
 import {
   useState,
-  useEffect
+  useEffect,
+  useContext
 } from 'react';
-import {
-  Spinner
-} from 'react-bootstrap';
 import axios from 'axios';
 
 import PageTitle from '../components/title';
 import PageDescription from '../components/description';
 import InfiniteScrollList from '../components/infinite-scroll-list';
-import CONSTANTS from '../constants/constants';
+import Search from '../components/search';
+import AppContext from '../context/app-context';
 
 function SearchUsers() {
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [usersList, setUsersList] = useState([]);
-  const [lastItemId, setLastItemId] = useState(0);
+  const appContext = useContext(AppContext);
+  const [usersList, setUsersList] = useState(null);
+  const [page, setPage] = useState(1);
 
   async function loadUsers() {
-    try {
-      const usersResult = await axios.get(`${process.env.REACT_APP_BASE_URL}users`, { params: { since: lastItemId, per_page: CONSTANTS.ITEMS_LENGTH } });
-      setUsersList([...usersList, ...usersResult.data]);
-    } catch(e) {
-      console.error(e);
+    if (appContext.criteria !== '') {
+      try {
+        const usersResult = await axios
+          .get(`${process.env.REACT_APP_BASE_URL}users?q=${appContext.criteria} in:login&per_page=10&page=${page}`);
+        const nonRepeatedList = new Set([...usersList, ...usersResult.data.items]);
+        setUsersList(Array.from(nonRepeatedList));
+      } catch(e) {
+        console.error(e);
+      }
     }
   }
 
   useEffect(() => {
-    loadUsers();
+    usersList && usersList.length === 0 ? setPage(1) : setPage(page + 1);
     // eslint-disable-next-line
-  }, []);
+  }, [usersList])
 
   useEffect(() => {
-    if (usersList.length > 0) {
-      setLastItemId(usersList[usersList.length - 1].id);
-      setIsLoading(false);
-    }
-  }, [usersList]);
+    page === 1 && loadUsers();
+    // eslint-disable-next-line
+  }, [page])
+
+  useEffect(() => {
+    appContext.criteria = '';
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>
       <PageTitle content="Users" />
-      <PageDescription content="In this page you could find the registered users on Github." />
-      {
-        isLoading
-        ? <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status" />
-          </div>
-        : <InfiniteScrollList list={usersList} itemNameAttribute="login" fetchData={loadUsers} />
-      }
+      <PageDescription content="In this page you can saerch for registered users on Github." />
+      <Search search={() => setUsersList([])} />
+      <InfiniteScrollList
+        list={usersList}
+        itemNameAttribute="login"
+        fetchData={loadUsers}
+      />
     </>
   );
 }

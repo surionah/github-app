@@ -1,9 +1,6 @@
 import {
   Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button
+  Nav
 } from 'react-bootstrap';
 
 function HeaderNavbar({location}) {

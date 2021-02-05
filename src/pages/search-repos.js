@@ -1,51 +1,60 @@
-import { useState, useEffect } from 'react';
 import {
-  Spinner
-} from 'react-bootstrap';
+  useState,
+  useEffect,
+  useContext
+} from 'react';
 import axios from 'axios';
 
 import PageTitle from '../components/title';
 import PageDescription from '../components/description';
 import InfiniteScrollList from '../components/infinite-scroll-list';
+import Search from '../components/search';
+import AppContext from '../context/app-context';
 
 function SearchRepos() {
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [reposList, setReposList] = useState([]);
-  const [lastItemId, setLastItemId] = useState(1);
+  const appContext = useContext(AppContext);
+  const [reposList, setReposList] = useState(null);
+  const [page, setPage] = useState(1);
 
   async function loadRepos() {
-    try {
-      const reposResult = await axios.get(`${process.env.REACT_APP_BASE_URL}repositories`, { params: { since: lastItemId } });
-      setReposList([...reposList, ...reposResult.data]);
-    } catch(e) {
-      console.error(e);
+    if (appContext.criteria !== '') {
+      try {
+        const usersResult = await axios
+          .get(`${process.env.REACT_APP_BASE_URL}repositories?q=${appContext.criteria} in:name&per_page=10&page=${page}`);
+        const nonRepeatedList = new Set([...reposList, ...usersResult.data.items]);
+        setReposList(Array.from(nonRepeatedList));
+      } catch(e) {
+        console.error(e);
+      }
     }
   }
 
   useEffect(() => {
-    loadRepos();
+    reposList && reposList.length === 0 ? setPage(1) : setPage(page + 1);
     // eslint-disable-next-line
-  }, []);
+  }, [reposList])
 
   useEffect(() => {
-    if (reposList.length > 0) {
-      setLastItemId(reposList[reposList.length - 1].id);
-      setIsLoading(false);
-    }
-  }, [reposList]);
+    page === 1 && loadRepos();
+    // eslint-disable-next-line
+  }, [page])
+
+  useEffect(() => {
+    appContext.criteria = '';
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>
       <PageTitle content="Repositories" />
-      <PageDescription content="In this page you could find the created repositories on Github." />
-      {
-        isLoading
-        ? <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status" />
-          </div>
-        : <InfiniteScrollList list={reposList} itemNameAttribute="name" fetchData={loadRepos} />
-      }
+      <PageDescription content="In this page you can search for created repositories on Github." />
+      <Search search={() => setReposList([])} />
+      <InfiniteScrollList
+        list={reposList}
+        itemNameAttribute="name"
+        fetchData={loadRepos}
+      />
     </>
   );
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Description = styled.h3`
   font-size: 1.5rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   @media (max-width: 768px) {
     font-size: 1.0rem;
   }
