@@ -1,7 +1,8 @@
 {
   "name": "github-app",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "axios": "^0.21.1",
     "react": "^17.0.1",
