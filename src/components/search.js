@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import {
   Button,
@@ -29,6 +30,10 @@ function Search({search}) {
       </Button>
     </Form>
   );
+}
+
+Search.propTypes = {
+  search: PropTypes.func.isRequired
 }
 
 export default Search;

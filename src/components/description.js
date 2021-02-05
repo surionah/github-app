@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Description = styled.h3`
@@ -10,8 +11,12 @@ const Description = styled.h3`
 
 function PageDescription({content}) {
   return (
-    <Description>{ content }</Description>
+    <Description>{content}</Description>
   );
+}
+
+PageDescription.propTypes = {
+  content: PropTypes.string.isRequired
 }
 
 export default PageDescription;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Spinner } from 'react-bootstrap';
@@ -50,6 +51,12 @@ function InfiniteScrollList({list, itemNameAttribute, fetchData}) {
       }
     </>
   );
+}
+
+InfiniteScrollList.propTypes = {
+  list: PropTypes.array,
+  itemNameAttribute: PropTypes.string.isRequired,
+  fetchData: PropTypes.func.isRequired
 }
 
 export default InfiniteScrollList;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Button,
   Card,
@@ -53,6 +54,12 @@ function ItemList({name, imageUrl, pageUrl}) {
       </Card.Body>
     </Card>
   );
+}
+
+ItemList.propTypes = {
+  name: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  pageUrl: PropTypes.string.isRequired
 }
 
 export default ItemList;
